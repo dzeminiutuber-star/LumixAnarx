@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090909">
+  <meta name="description" content="LumixAnarx — Minecraft сервер. Присоединяйся к игре!">
+  <title>LumixAnarx — Minecraft Server</title>
+  <style>
+    :root{--gold:#e9bd58;--gold2:#ffe5a0;--bg:#090909;--panel:#151515;--muted:#aaa}
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{margin:0;background:radial-gradient(ellipse at 50% -15%,#4a3514 0,transparent 42%),var(--bg);color:#f7f3e9;font-family:Arial,Helvetica,sans-serif}
+    a{color:inherit;text-decoration:none}.wrap{width:min(1100px,92%);margin:auto}
+    header{height:76px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff16}
+    .brand{font-weight:900;letter-spacing:2px;color:var(--gold);font-size:21px}.brand span{color:#fff}
+    nav{display:flex;gap:24px;color:#d2c8b3;font-size:14px}nav a:hover{color:var(--gold)}
+    .hero{min-height:590px;display:grid;place-items:center;text-align:center;padding:70px 0}
+    .eyebrow{display:inline-block;border:1px solid #b88d3e66;border-radius:99px;padding:8px 15px;color:var(--gold2);font-size:12px;letter-spacing:2px;text-transform:uppercase;background:#d5a33a12}
+    h1{font-size:clamp(42px,8vw,82px);line-height:.98;margin:25px 0 18px;letter-spacing:2px;text-shadow:0 5px 35px #e9bd5830}
+    h1 em{font-style:normal;color:var(--gold)}
+    .sub{max-width:620px;margin:0 auto;color:#c7c0b2;line-height:1.7;font-size:17px}
+    .actions{display:flex;gap:13px;justify-content:center;flex-wrap:wrap;margin-top:32px}
+    .btn{border:1px solid var(--gold);padding:14px 22px;border-radius:8px;font-weight:800;letter-spacing:.4px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
+    .primary{background:linear-gradient(135deg,var(--gold2),#bd852b);color:#171109;border:0}.secondary{background:#ffffff08;color:#f8e8c3}
+    .btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
+    .ipbox{margin:34px auto 0;padding:14px 18px;background:#111;border:1px solid #b88d3e55;border-radius:10px;display:flex;gap:16px;align-items:center;justify-content:center;max-width:430px;flex-wrap:wrap}
+    .iplabel{font-size:11px;color:#a99b7e;letter-spacing:1.5px}.ip{font-weight:800;color:var(--gold2);letter-spacing:.5px}
+    section{padding:65px 0}.section-title{text-align:center;font-size:30px;margin:0 0 12px}.section-title span{color:var(--gold)}
+    .lead{text-align:center;color:var(--muted);margin:0 auto 30px;max-width:600px;line-height:1.6}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
+    .card{background:linear-gradient(145deg,#191919,#101010);border:1px solid #ffffff14;border-radius:13px;padding:24px;min-height:170px}
+    .card .ico{font-size:27px}.card h3{color:var(--gold2);margin:15px 0 8px}.card p{color:#aaa;line-height:1.6;margin:0;font-size:14px}
+    .join{background:linear-gradient(120deg,#21190d,#12100c);border:1px solid #d4a74755;border-radius:16px;text-align:center;padding:42px 20px}
+    footer{border-top:1px solid #ffffff16;padding:25px 0;color:#817b70;font-size:13px;text-align:center}
+    #toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#e9bd58;color:#171109;padding:12px 18px;border-radius:8px;font-weight:700;display:none}
+    /* Удобная полоса прокрутки справа */
+    .page-scrollbar{position:fixed;z-index:15;right:8px;top:12%;height:76%;width:14px;border-radius:20px;background:#ffffff12;border:1px solid #d9ad4e44;touch-action:none;cursor:pointer}
+    .page-scrollbar-thumb{position:absolute;left:2px;top:0;width:8px;min-height:34px;border-radius:20px;background:linear-gradient(180deg,#ffe5a0,#bd852b);box-shadow:0 0 12px #e9bd5855;cursor:grab}
+    .page-scrollbar-thumb:active{cursor:grabbing}
+    @media(max-width:700px){.page-scrollbar{right:3px;width:11px}.page-scrollbar-thumb{left:1px;width:7px}}
+    .modal-backdrop{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;padding:18px;z-index:20}
+    .modal-backdrop.show{display:flex}
+    .giveaway-modal{width:min(520px,100%);background:linear-gradient(145deg,#211b10,#101010);border:1px solid #d9ad4e;border-radius:16px;padding:26px;box-shadow:0 20px 80px #000b;position:relative}
+    .giveaway-modal h2{color:var(--gold2);font-size:23px;margin:0 32px 18px 0}
+    .giveaway-modal p{line-height:1.6;color:#f1e8d5}
+    .giveaway-prizes{list-style:none;padding:0;margin:18px 0 24px;display:grid;gap:12px}
+    .giveaway-prizes li{background:#ffffff09;border:1px solid #ffffff12;padding:11px 13px;border-radius:8px;font-weight:700}
+    .modal-close{position:absolute;right:16px;top:12px;background:transparent;border:0;color:#fff;font-size:27px;cursor:pointer}
+    .giveaway-modal .btn{width:100%}
+    @media(max-width:700px){nav{gap:12px;font-size:12px}.grid{grid-template-columns:1fr}.hero{min-height:530px}header{height:auto;padding:20px 0;gap:14px;flex-wrap:wrap}}
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <a class="brand" href="#">LUMIX<span>ANARX</span></a>
+    <nav><a href="#about">О сервере</a><a href="#features">Преимущества</a><a href="#join">Как играть</a></nav>
+  </header>
+
+  <main>
+    <section class="hero wrap">
+      <div>
+        <div class="eyebrow">Minecraft • Твой новый мир</div>
+        <h1>LUMIX<br><em>ANARX</em></h1>
+        <p class="sub">Собирай друзей, развивайся, сражайся и создавай собственную историю. Твоё приключение начинается здесь.</p>
+        <div class="actions">
+          <a class="btn primary" href="#join">ИГРАТЬ НА СЕРВЕРЕ</a>
+          <a class="btn secondary" href="#about">УЗНАТЬ БОЛЬШЕ</a>
+          <button class="btn secondary" type="button" onclick="openGiveaway()">РОЗЫГРЫШ??</button>
+        </div>
+        <div class="ipbox">
+          <div><div class="iplabel">IP-АДРЕС СЕРВЕРА</div><div class="ip" id="serverIp">УТОЧНЯЕТСЯ</div></div>
+          <button class="btn secondary" onclick="copyIp()">КОПИРОВАТЬ</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="wrap">
+      <h2 class="section-title">О <span>LUMIXANARX</span></h2>
+      <p class="lead">Добро пожаловать на страницу нашего Minecraft-проекта. Здесь появятся актуальные сведения о режиме, правилах и событиях сервера.</p>
+    </section>
+
+    <section id="features" class="wrap">
+      <h2 class="section-title">ПОЧЕМУ <span>МЫ?</span></h2>
+      <p class="lead">Главное о проекте — в одном месте.</p>
+      <div class="grid">
+        <article class="card"><div class="ico">⚔️</div><h3>Сражения</h3><p>Испытай свои навыки и проверь себя в игре.</p></article>
+        <article class="card"><div class="ico">👑</div><h3>Привилегии</h3><p>Информация о донат-рангах и возможностях появится здесь.</p></article>
+        <article class="card"><div class="ico">🎁</div><h3>События</h3><p>Следи за новостями, конкурсами и раздачами проекта.</p></article>
+      </div>
+    </section>
+
+    <section id="join" class="wrap">
+      <div class="join">
+        <h2 class="section-title">ГОТОВ <span>ВОЙТИ?</span></h2>
+        <p class="lead">Скопируй IP и добавь сервер в список Minecraft. Точный адрес скоро будет добавлен.</p>
+        <button class="btn primary" onclick="copyIp()">СКОПИРОВАТЬ IP</button>
+      </div>
+    </section>
+  </main>
+  <footer><div class="wrap">© 2026 LumixAnarx. Неофициальный сайт Minecraft-сервера.</div></footer>
+  <div class="modal-backdrop" id="giveawayBackdrop" role="dialog" aria-modal="true" aria-labelledby="giveawayTitle" onclick="backdropClose(event)">
+    <div class="giveaway-modal">
+      <button class="modal-close" type="button" aria-label="Закрыть" onclick="closeGiveaway()">×</button>
+      <h2 id="giveawayTitle">📄 ВНИМАНИЕ!</h2>
+      <p>У НАС ЗАВТРА В 19:00 ПО МСК БУДЕТ РАЗДАЧА ДОНАТОВ</p>
+      <ol class="giveaway-prizes">
+        <li>1️⃣ 👑 : D.ADMIN</li>
+        <li>2️⃣ 💎 : D.GLMODER</li>
+        <li>3️⃣ 🛡 : HELPER</li>
+        <li>4️⃣ 🐰 : FENIX</li>
+      </ol>
+      <button class="btn primary" type="button" onclick="joinGiveaway()">Участвую</button>
+    </div>
+  </div>
+  <div id="toast">IP скопирован!</div>
+  <div class="page-scrollbar" id="pageScrollbar" aria-label="Прокрутка страницы" role="scrollbar" aria-controls="main" aria-orientation="vertical" tabindex="0">
+    <div class="page-scrollbar-thumb" id="pageScrollbarThumb"></div>
+  </div>
+  <script>
+    // Когда узнаем точный адрес сервера, замени значение ниже.
+    const SERVER_IP = "LumixAnarx.aternos.me:60563";
+    const scrollTrack = document.getElementById("pageScrollbar");
+    const scrollThumb = document.getElementById("pageScrollbarThumb");
+    let draggingScrollbar = false;
+    let dragOffset = 0;
+    function updatePageScrollbar(){
+      const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      const trackHeight = scrollTrack.clientHeight;
+      const thumbHeight = Math.max(34, trackHeight * window.innerHeight / document.documentElement.scrollHeight);
+      scrollThumb.style.height = thumbHeight + "px";
+      const maxThumbTop = trackHeight - thumbHeight;
+      scrollThumb.style.top = (window.scrollY / maxScroll * maxThumbTop) + "px";
+      scrollTrack.setAttribute("aria-valuenow", String(Math.round(window.scrollY / maxScroll * 100)));
+    }
+    function scrollFromPointer(clientY){
+      const rect = scrollTrack.getBoundingClientRect();
+      const thumbHeight = scrollThumb.offsetHeight;
+      const maxThumbTop = Math.max(1, rect.height - thumbHeight);
+      const top = Math.min(maxThumbTop, Math.max(0, clientY - rect.top - dragOffset));
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      window.scrollTo(0, top / maxThumbTop * maxScroll);
+    }
+    scrollThumb.addEventListener("pointerdown", event => {
+      draggingScrollbar = true;
+      dragOffset = event.clientY - scrollThumb.getBoundingClientRect().top;
+      scrollThumb.setPointerCapture(event.pointerId);
+      event.preventDefault();
+    });
+    scrollThumb.addEventListener("pointermove", event => {
+      if(draggingScrollbar) scrollFromPointer(event.clientY);
+    });
+    scrollThumb.addEventListener("pointerup", () => draggingScrollbar = false);
+    scrollThumb.addEventListener("pointercancel", () => draggingScrollbar = false);
+    scrollTrack.addEventListener("pointerdown", event => {
+      if(event.target === scrollThumb) return;
+      dragOffset = scrollThumb.offsetHeight / 2;
+      scrollFromPointer(event.clientY);
+    });
+    scrollTrack.addEventListener("keydown", event => {
+      if(event.key === "ArrowDown") window.scrollBy(0, 100);
+      else if(event.key === "ArrowUp") window.scrollBy(0, -100);
+      else if(event.key === "PageDown") window.scrollBy(0, window.innerHeight * .8);
+      else if(event.key === "PageUp") window.scrollBy(0, -window.innerHeight * .8);
+      else return;
+      event.preventDefault();
+    });
+    window.addEventListener("scroll", updatePageScrollbar, {passive:true});
+    window.addEventListener("resize", updatePageScrollbar);
+    window.addEventListener("load", updatePageScrollbar);
+    updatePageScrollbar();
+    document.getElementById("serverIp").textContent = SERVER_IP;
+    function openGiveaway(){
+      document.getElementById("giveawayBackdrop").classList.add("show");
+    }
+    function closeGiveaway(){
+      document.getElementById("giveawayBackdrop").classList.remove("show");
+    }
+    function backdropClose(event){
+      if(event.target.id === "giveawayBackdrop") closeGiveaway();
+    }
+    function joinGiveaway(){
+      alert("Завтра можно этого зделать!");
+    }
+    document.addEventListener("keydown", function(event){
+      if(event.key === "Escape") closeGiveaway();
+    });
+    async function copyIp(){
+      try{
+        await navigator.clipboard.writeText(SERVER_IP);
+        const t=document.getElementById("toast");
+        t.textContent = "IP скопирован!";
+        t.style.display="block";
+        setTimeout(()=>t.style.display="none",1800);
+      }catch(e){
+        const helper = document.createElement("textarea");
+        helper.value = SERVER_IP;
+        helper.setAttribute("readonly", "");
+        helper.style.position = "fixed";
+        helper.style.opacity = "0";
+        document.body.appendChild(helper);
+        helper.select();
+        const copied = document.execCommand("copy");
+        helper.remove();
+        if(copied){
+          const t=document.getElementById("toast");
+          t.textContent = "IP скопирован!";
+          t.style.display="block";
+          setTimeout(()=>t.style.display="none",1800);
+        } else {
+          alert("Не удалось скопировать автоматически. IP: " + SERVER_IP);
+        }
+      }
+    }
+  </script>
+</body>
+</html>
